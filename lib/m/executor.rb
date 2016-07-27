@@ -25,17 +25,7 @@ module M
         # directly run the tests from here and exit with the status of the tests passing or failing
         runner.run(test_arguments)
       elsif tests.size > 0
-        # Otherwise we found no tests on this line, so you need to pick one.
-        message = "No tests found on line #{testable.line}. Valid tests to run:\n\n"
-
-        # For every test ordered by line number,
-        # spit out the test name and line number where it starts,
-        tests.by_line_number do |test|
-          message << "#{sprintf("%0#{tests.column_size}s", test.name)}: m #{testable.file}:#{test.start_line}\n"
-        end
-
-        # Spit out helpful message and bail
-        STDERR.puts message
+        STDERR.puts "No tests found on line #{testable.line}."
         false
       else
         # There were no tests at all
